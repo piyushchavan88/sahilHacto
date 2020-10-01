@@ -1,0 +1,29 @@
+ll kmp(string &s)
+{
+    string t=s;
+    reverse(all(t));
+    string a=s+"#"+t;
+    ll n=a.size();
+    vll nxt(n);
+    nxt[0]=0;
+    ll i=0,j=1;
+    while(j<n)
+    {
+        if(a[i]==a[j])
+        {
+            nxt[j]=i+1;
+            i++;j++;
+        }
+        else
+        {
+            if(i)
+            i=nxt[i-1];
+            else
+            {
+                nxt[j]=0;
+                j++;
+            }
+        }
+    }
+    return(nxt[n-1]);
+}
