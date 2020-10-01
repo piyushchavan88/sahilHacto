@@ -1,0 +1,19 @@
+ll parent(ll x,vector<ll> &par)
+{
+    if(par[x]==x)
+        return(x);
+    par[x]=parent(par[x],par);
+    return(par[x]);
+}
+bool uni(ll a,ll b,vector<ll> &par)
+{
+    ll pa=parent(a,par);
+    ll pb=parent(b,par);
+    if(pa==pb)
+        return 0;
+    else
+    {
+        par[pa]=pb;
+        return 1;
+    }
+}
