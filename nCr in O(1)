@@ -1,0 +1,33 @@
+const ll N = 3e5 + 5;
+ll fact[N], invfact[N];
+ll modinv(ll k,ll modd)
+{
+	return xpow(k, modd-2, modd);
+}
+void precompute(ll modd)
+{
+	fact[0]=fact[1]=1;
+	for(ll i=2;i<N;i++)
+	{
+		fact[i]=fact[i-1]*i;
+		fact[i]%=modd;
+	}
+	invfact[N-1]=modinv(fact[N-1],modd);
+	for(ll i=N-2;i>=0;i--)
+	{
+		invfact[i]=invfact[i+1]*(i+1);
+		invfact[i]%=modd;
+	}
+}
+ll nCr(ll x, ll y,ll modd)
+{
+	if(y>x)
+		return 0;
+	ll num=fact[x];
+	num*=invfact[y];
+	num%=modd;
+	num*=invfact[x-y];
+	num%=modd;
+	return num;
+}
+precompute(mod);
